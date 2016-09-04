@@ -12,12 +12,14 @@ class Application():
 
 	def create_widgets(self):
 		self.vbox = gtk.VBox(spacing = 5)
+		self.vbox1 = gtk.VBox(spacing = 5)
 		self.hbox2 = gtk.HBox(spacing = 5)
 		self.hbox = gtk.HBox(spacing = 5)
 		self.hbox1 =gtk.HBox(spacing = 5)
 		self.hbox4 = gtk.HBox(spacing =5)
 		self.hbox5 = gtk.HBox(spacing = 5)
-		
+		self.hbox6 = gtk.HBox(spacing = 5)
+
 		self.entry = gtk.Entry()
 		self.hbox2.pack_start(self.entry)
 
@@ -48,6 +50,14 @@ class Application():
 		self.hbox4.pack_start(self.label9)
 		self.hbox4.pack_start(self.multiplication)
 
+		self.labeldecimal = gtk.Button(".")
+		self.label0 = gtk.Button("0")
+		self.mod = gtk.Button("%")
+		self.division = gtk.Button("/")
+		self.hbox6.pack_start(self.labeldecimal)
+		self.hbox6.pack_start(self.label0)
+		self.hbox6.pack_start(self.mod)
+		self.hbox6.pack_start(self.division)
 
 		self.calculate = gtk.Button("Enter")
 		self.hbox5.pack_start(self.calculate)
@@ -56,11 +66,18 @@ class Application():
 		self.vbox.pack_start(self.hbox)
 		self.vbox.pack_start(self.hbox1)
 		self.vbox.pack_start(self.hbox4)
+		self.vbox.pack_start(self.hbox6)
 		self.vbox.pack_start(self.hbox5)
 
+
 		self.window.add(self.vbox)
+		
+
+
 		self.window.connect('destroy',self.exit)
-	
+
+
+
 	def connect_signals(self):
 		self.label1.connect('clicked',self.display,1)
 		self.label2.connect('clicked',self.display,2)
@@ -71,12 +88,17 @@ class Application():
 		self.label7.connect('clicked',self.display,7)
 		self.label8.connect('clicked',self.display,8)
 		self.label9.connect('clicked',self.display,9)
-		
+		self.label0.connect('clicked',self.display,0)
+
+		self.labeldecimal.connect('clicked',self.display,'.')
 		self.addition.connect('clicked',self.display,'+')
 		self.subration.connect('clicked',self.display,'-')
 		self.multiplication.connect('clicked',self.display,'*')		
-
+		self.division.connect('clicked',self.display,'/')
+		self.mod.connect('clicked',self.display,'%')	
+		
 		self.calculate.connect('clicked',self.calc)
+
 
 	def display(self,widget,i ):
 		self.string = self.string + str(i)
